@@ -1,0 +1,69 @@
+{
+  "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "results": [
+    {
+      "name": "Mount renders unique panels with structural CSS",
+      "pass": true
+    },
+    {
+      "name": "Focus keeps selected card in front",
+      "pass": true
+    },
+    {
+      "name": "Native inputs retain edits and clicks do not dismiss focus",
+      "pass": true
+    },
+    {
+      "name": "Keyboard grip moves and Escape returns to overview",
+      "pass": true
+    },
+    {
+      "name": "Path focus and overview retain the configured belt",
+      "pass": true
+    },
+    {
+      "name": "Pause is idle and resume restarts visible path",
+      "pass": true
+    },
+    {
+      "name": "Compact scene is flat and stops path motion",
+      "pass": true
+    },
+    {
+      "name": "Workspace assembly and resize keep native values",
+      "pass": true
+    },
+    {
+      "name": "Standalone workspace compacts semantic content before scaling",
+      "pass": true
+    },
+    {
+      "name": "Pile grip cycles the stack and supports free-placement settings",
+      "pass": true
+    },
+    {
+      "name": "Cursor steering reverses and brakes the real DOM loop to idle",
+      "pass": true
+    },
+    {
+      "name": "Rail navigation and native controls retain one centered selection",
+      "pass": true
+    },
+    {
+      "name": "Fan selection and spiral preserve live panel identities",
+      "pass": true
+    },
+    {
+      "name": "Destroy restores authored markup and cannot restart",
+      "pass": true
+    },
+    {
+      "name": "Offscreen scene owns no animation frame",
+      "pass": true
+    }
+  ]
+}

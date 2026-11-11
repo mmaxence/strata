@@ -1,0 +1,48 @@
+{
+  "name": "@strata-ui/core",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "type": "module",
+  "description": "Dependency-free spatial interfaces built from real HTML panels.",
+  "license": "MIT",
+  "sideEffects": [
+    "./src/strata.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/strata.d.ts",
+      "import": "./src/strata.js"
+    },
+    "./style.css": "./src/strata.css"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "ASSETS.md"
+  ],
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test test/*.test.mjs",
+    "measure:size": "node scripts/measure-size.mjs",
+    "build:site": "node scripts/build-site.mjs",
+    "prepack": "npm run check && npm test"
+  },
+  "homepage": "https://mmaxence.github.io/strata/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmaxence/strata.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mmaxence/strata/issues"
+  },
+  "keywords": [
+    "spatial-ui",
+    "css-3d",
+    "dom",
+    "animation",
+    "javascript",
+    "accessibility"
+  ]
+}

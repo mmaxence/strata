@@ -1,0 +1,145 @@
+/* Strata structural styles. Import once; theme with the --strata-* properties. */
+.scene, .scene .surface, .scene [data-visual], .scene [data-summary], .scene [data-resize] { box-sizing: border-box; }
+.scene {
+  position: relative;
+  height: 650px;
+  perspective: 1600px;
+  outline: none;
+}
+.scene[hidden] { display: none; }
+.scene .camera {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--camera-y, 0deg));
+  transition: transform .7s cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+.scene .surface {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 260px;
+  transform-origin: center;
+  backface-visibility: hidden;
+  pointer-events: auto;
+  isolation: auto;
+  border: 0;
+  background: none;
+  transition: transform .75s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
+}
+.scene .surface > [data-visual] {
+  border: 1px solid var(--strata-line, #52627670);
+  border-radius: var(--strata-radius, 10px);
+  background: var(--strata-surface, #18212d);
+  box-shadow: 0 20px 50px #0004;
+  overflow: hidden;
+  transition: filter .25s ease, border-color .2s, box-shadow .2s;
+}
+.scene .surface[data-active=true] > [data-visual] {
+  border-color: color-mix(in srgb, var(--strata-accent, #d3efb0) 60%, transparent);
+}
+.scene .surface:focus-within > [data-visual] { filter: none !important; }
+.scene:not([data-ready]) .surface { visibility: hidden; transition: none; }
+.scene .surface[data-loop=true],
+.scene .surface[data-dragging=true],
+.scene .surface[data-settling=true],
+.scene .surface[data-resizing=true] { transition: none; }
+.scene .surface[data-dragging=true] { cursor: grabbing; user-select: none; }
+.scene .surface[data-dragging=true] > [data-visual] {
+  border-color: var(--strata-accent, #d3efb0);
+  box-shadow: 0 32px 65px #0006;
+}
+.scene[data-layout=pile] .surface { touch-action: none; }
+.scene [data-drag], .scene [data-resize] { touch-action: none; }
+.scene [data-drag] { cursor: grab; }
+.scene .surface[data-dragging=true] * { cursor: grabbing !important; }
+.scene .surface[data-sized=true] > [data-visual] { height: 100%; overflow: auto; }
+.scene[data-choreography=spring] .surface:not([data-loop=true]):not([data-dragging=true]):not([data-settling=true]):not([data-resizing=true]) {
+  transition: transform .95s cubic-bezier(.2, 1.35, .35, 1), opacity .3s;
+}
+.scene[data-choreography=sweep] .surface:not([data-loop=true]):not([data-dragging=true]):not([data-settling=true]):not([data-resizing=true]) {
+  transition: transform .9s cubic-bezier(.16, 1, .3, 1), rotate .65s, opacity .3s;
+}
+.scene[data-choreography=sweep][data-mode=focus] .surface[data-active=true] { rotate: -2deg; }
+.scene[data-mode=overview] .surface,
+.scene[data-assembled=true] .surface { rotate: 0deg; }
+.scene [data-resize] {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  z-index: 8;
+  opacity: 0;
+  padding: 0;
+  background: transparent;
+  border: 2px solid var(--strata-accent, #d3efb0);
+  transition: opacity .15s;
+}
+.scene .surface:hover > [data-resize],
+.scene .surface:focus-within > [data-resize],
+.scene [data-resize]:focus-visible { opacity: 1; }
+.scene [data-resize=nw] { top: -5px; left: -5px; cursor: nwse-resize; border-right: 0; border-bottom: 0; }
+.scene [data-resize=ne] { top: -5px; right: -5px; cursor: nesw-resize; border-left: 0; border-bottom: 0; }
+.scene [data-resize=sw] { bottom: -5px; left: -5px; cursor: nesw-resize; border-right: 0; border-top: 0; }
+.scene [data-resize=se] { bottom: -5px; right: -5px; cursor: nwse-resize; border-left: 0; border-top: 0; }
+/* Assembly geometry is authored through createScene({ assembly }). */
+.scene[data-assembled=true] .surface {
+  width: var(--assembled-width, 260px) !important;
+  height: var(--assembled-height, 270px) !important;
+}
+.scene[data-assembled=true] .surface > [data-visual] { height: 100%; overflow: auto; }
+.scene[data-assembled=true] [data-resize] { display: none; }
+
+/* Optional semantic detail: full controls and a readable compact summary. */
+.scene [data-summary] {
+  display: none;
+  padding: 18px;
+  gap: 8px;
+  align-items: center;
+  grid-template-columns: 1fr;
+}
+.scene [data-summary]:has([data-summary-icon]) { grid-template-columns: 32px 1fr; }
+.scene [data-summary-icon] { font-size: 24px; color: var(--strata-accent, #d3efb0); grid-row: span 2; }
+.scene [data-summary] strong { font-size: 13px; font-weight: 500; }
+.scene [data-summary] small { font-size: 11px; line-height: 1.5; }
+.scene .surface[data-density=compact] { width: 220px !important; height: auto !important; }
+.scene .surface[data-density=minimal] { width: 160px !important; height: auto !important; }
+.scene .surface[data-density=compact] [data-content],
+.scene .surface[data-density=minimal] [data-content] { display: none; }
+.scene .surface[data-density=compact] [data-summary],
+.scene .surface[data-density=minimal] [data-summary] { display: grid; }
+.scene .surface[data-density=compact] [data-summary] strong,
+.scene .surface[data-density=minimal] [data-summary] strong {
+  font-size: max(13px, calc(12px / var(--readability-scale, 1)));
+  line-height: 1.25;
+}
+.scene .surface[data-density=compact] [data-summary] small { font-size: max(11px, calc(11px / var(--readability-scale, 1))); }
+.scene .surface[data-density=minimal] [data-summary] { grid-template-columns: 1fr; gap: 5px; padding: 10px; text-align: center; }
+.scene .surface[data-density=minimal] [data-summary] small { display: none; }
+.scene .surface[data-density=minimal] [data-summary-icon] { grid-row: auto; font-size: max(20px, calc(16px / var(--readability-scale, 1))); }
+.scene .surface[data-density=minimal] > [data-resize] { display: none; }
+.scene[data-compact=true] { height: auto !important; padding: 20px 16px; perspective: none; }
+.scene[data-compact=true] .camera { position: relative; display: grid; gap: 18px; transform: none !important; transition: none !important; }
+.scene[data-compact=true] .surface {
+  position: relative;
+  touch-action: pan-y;
+  top: auto;
+  left: auto;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 520px;
+  margin: auto;
+  rotate: 0deg !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+.scene[data-compact=true] .surface > [data-visual] { height: auto !important; filter: none !important; }
+.scene[data-compact=true] [data-drag], .scene[data-compact=true] [data-resize] { display: none; }
+.scene[data-motion=reduced] .surface, .scene[data-motion=reduced] .camera { transition: none !important; rotate: 0deg !important; }
+@media (prefers-reduced-motion: reduce) {
+  .scene *, .scene *::before, .scene *::after { transition: none !important; animation: none !important; }
+}
+
+/* Rails keep off-canvas neighbors out of the page without flattening the camera. */
+.scene[data-layout=rail]:not([data-compact=true]) { overflow: clip; }

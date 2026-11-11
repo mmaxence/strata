@@ -1,0 +1,46 @@
+{
+  "browser": "Chromium 156, macOS, in-app browser",
+  "desktopViewport": "1280x720",
+  "compactViewport": "390x844 (emulated viewport, not a physical phone)",
+  "checks": [
+    "Assemble workspace retains editable native controls with canvas centered",
+    "Headline edit persists while separating modules",
+    "Pointer corner resize expands canvas and compacts supporting modules",
+    "Workspace dimensions and edited headline persist through collection switching",
+    "Selected belt card renders in front of all neighboring cards",
+    "Dragging selected belt card resumes shared path without free-form displacement",
+    "Pause control and study detail dialog operate",
+    "Setup dialog displays code and explicit geometry serialization limit",
+    "390px playground uses full-content document stack without horizontal overflow",
+    "Compact view still exposes tuning controls",
+    "Reduced-motion emulation produces data-motion=reduced and zero visual blur",
+    "Independent workspace uses configured assembly widths and heights without demo CSS",
+    "Independent expanded workspace shows semantic summaries before geometric shrinking",
+    "Independent compact workspace overrides inline height; following content remains below scene",
+    "Grid opens in overview with a measured 53.5px desktop row gap",
+    "Pile drag sends front card behind; free placement persists until disabled",
+    "Belt cursor reverses left and stops completely at the center",
+    "Launch checklist completion survives switching to reading notes and back",
+    "Reading fan focus, mark-read action and detail dialog work",
+    "Review rail Next selects the next item; horizontal pointer drag snaps to item 3 and stays on the rail",
+    "390px hero and family navigation have no horizontal overflow; preview is keyboard reachable and Escape closes it",
+    "Reduced-motion emulation disables hero image and logo animations",
+    "Showreel automatically advances across orbit, spread, stack, focus and flow using the same five DOM cards",
+    "Manual showreel chapter selection and pause/play controls work",
+    "Reduced-motion emulation marks showreel paused and disables autoplay control",
+    "390px showreel scales spatial cards without horizontal page overflow; changing breakpoint remounts cleanly",
+    "Attention gallery supports native exhibit selection and View all",
+    "Enabling pointer dwell and holding over Rhythm focuses it and updates the interpretation after 900ms",
+    "Switching from Attention gallery to Collection restores the collection controls and hides attention controls",
+    "390px Attention gallery becomes a readable stack and native selection updates its interpretation",
+    "Full-bleed hero measures x=0 and width=1280 at the 1280px viewport, with no border and a 636px stage below the navbar"
+  ],
+  "limits": [
+    "Safari and Firefox not verified",
+    "Physical phone performance and screen-reader task testing remain open"
+  ],
+  "supersededHeroChecks": [
+    "Hero headline and palette update the live composition; assembly retains controls",
+    "Assembled hero stage remains at scrollTop 0 with overflow clip"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "version": "0.1.0-alpha.1",
+  "timestamp": "2026-11-09T23:45:02.971Z",
+  "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "devicePixelRatio": 2
+  },
+  "panels": 6,
+  "baseline": {
+    "samples": 60,
+    "medianMs": 8.300000000000011,
+    "p95Ms": 8.700000000000045
+  },
+  "active": {
+    "samples": 180,
+    "medianMs": 8.300000000000182,
+    "p95Ms": 16.699999999999818,
+    "maxMs": 17,
+    "over1_5xBaseline": 15
+  },
+  "controller": {
+    "animationFramePending": true,
+    "pendingFrames": 1,
+    "layoutAnimations": 0,
+    "dragging": false,
+    "settling": false,
+    "resizing": false
+  },
+  "pausedController": {
+    "animationFramePending": false,
+    "pendingFrames": 0,
+    "layoutAnimations": 0,
+    "dragging": false,
+    "settling": false,
+    "resizing": false
+  }
+}

@@ -1,0 +1,10 @@
+import {createScene} from '../../src/strata.js';
+const element=document.getElementById('workspace');
+const scene=createScene(element,{workspace:true,assembly:{width:1080,height:560,slots:{canvas:{x:0,y:0,width:430,height:480},settings:{x:-370,y:0,width:270,height:320},notes:{x:370,y:0,width:270,height:320}}},onChange:state=>document.getElementById('status').textContent=state.assembled?'Assembled · edit any field':`${state.active} · ${state.mode}`});
+document.getElementById('assemble').onclick=()=>scene.setAssembled(true);
+document.getElementById('separate').onclick=()=>scene.setAssembled(false);
+document.getElementById('grow').onclick=()=>{scene.setAssembled(false);scene.focus('canvas');scene.resizeSurface('canvas',760,480);};
+document.getElementById('reset').onclick=()=>scene.reset();
+let pausedBeforeHide=false;
+addEventListener('pagehide',event=>{if(event.persisted){pausedBeforeHide=scene.isPaused;scene.pause();}else scene.destroy();});
+addEventListener('pageshow',event=>{if(event.persisted&&!pausedBeforeHide)scene.resume();});

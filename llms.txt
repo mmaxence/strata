@@ -1,0 +1,23 @@
+# Strata
+
+> Dependency-free spatial UI for real HTML panels. Public source alpha with a GitHub Pages showcase. Not published to npm.
+
+MIT library by Maxence Mauduit. Keep ordinary HTML controls and accessibility. No WebGL, tracking or runtime network requests.
+
+## Public resources
+- [Integration guide](agent-guide.md): markup, lifecycle, paths, workspace and limitations.
+- [Documentation](documentation/index.html): complete public API and usage.
+- [Type declarations](src/strata.d.ts): public contract.
+- [Standalone example](examples/basic/index.html): no demo stylesheet dependency.
+- [Adaptive workspace](examples/workspace/index.html): standalone assembly, resizing and semantic compaction.
+- [Performance](performance/index.html): reproducible local frame measurements and source sizes.
+- [README](README.md): setup and release commands.
+- [License](LICENSE): MIT notice.
+- [Asset notices](ASSETS.md): demo artwork and optional fonts.
+
+- [Installation and eye-tracking research](research/index.html): Provider options, interaction hypotheses and validation milestones. Eye tracking is research only; the pointer prototype is not shipped in the playground.
+
+- [Text-first overview](https://mmaxence.github.io/strata/overview.html): product, capabilities, examples and limitations without JavaScript.
+- [Full agent reference](https://mmaxence.github.io/strata/llms-full.txt): combined README, integration guidance and TypeScript API.
+- [Source repository](https://github.com/mmaxence/strata): MIT runtime and examples.
+- [Sitemap](https://mmaxence.github.io/strata/sitemap.xml).
