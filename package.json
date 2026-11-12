@@ -29,7 +29,8 @@
     "build:site": "node scripts/build-site.mjs",
     "prepack": "npm run check && npm test",
     "check:docs": "node scripts/check-docs.mjs",
-    "check:examples": "node scripts/check-examples.mjs"
+    "check:examples": "node scripts/check-examples.mjs",
+    "check:recipes": "node scripts/check-recipes.mjs"
   },
   "homepage": "https://mmaxence.github.io/strata/",
   "repository": {

@@ -191,6 +191,25 @@ Keep legacy repository/browser filenames, package identity/imports and data-surf
 
 The no-JS direct-camera fallback and controller-owned data-ready marker must remain intact during upgrades. Never apply opacity/blur/filter to a camera ancestor that must preserve a 3D hierarchy. Space owns surface transforms/z-index; theme visual leaves instead. Portals/outside roots are often appropriate for application-wide overlays. Drag-plane inversion does not model every decorative tilt/zoom/perspective ancestor/nested scroll; child text/media/object pointer projection is not automatically correct. Cross-library composition and physical device budgets require their own evidence. The runtime has no canvas/DPR option, WebGL/mesh occlusion or physics solver.
 
+## Eight practical use cases
+
+[Runnable gallery](examples/recipes/index.html) · [Choice and ownership guide](examples/recipes/guide.md). These application recipes are excluded from the runtime tarball; source and local built copies are not live publication evidence.
+
+| Job | Supported route | Native source |
+| --- | --- | --- |
+| Workspace | workspace + assembly slots | Draft, settings and notes |
+| Portfolio orbit | belt path; inspect/return | Project cards, links and reading note |
+| Comparison | grid + direct selection | Before/After labels and decision radios |
+| Product breakdown | declared header/body/footer assembly | One real proposal, not showcase Explosion API |
+| Onboarding | rail + navigate/focus | Step fields, preferences and review |
+| Reference board | fan/free placement | Links, notes and checkboxes |
+| Dashboard focus | grid + focus | Named output/table and native sample update |
+| Responsive cards | pile/cycle, compact stack | Native disclosures and reading note |
+
+One active scene and one application owner unify explicit open/overview/background/Escape return, drag state, composition context and teardown. Spatial selection is not modal DOM focus; ordinary input and onChange do not steal focus. Explicit close restores its invoking control, and composed entry context is reassembled. Labelled grips/corners and native step/compose controls provide keyboard/gesture alternatives. Native disclosures explicitly own their activation.
+
+The recipes retain manual pause and document choice. Compact width 760 uses the actual runtime stack; reduced preference remounts the same nodes with compactWidth:1600 for an intentionally flat alternative. This is application policy, not the library's default reduced layout or a new API. No media/font/service, child library, projected-pointer or physical-device/composition certification is added. Run npm run check:recipes after building.
+
 ## Validate and share
 
 Use Node.js 22 or newer for development scripts. The browser runtime itself does not require Node.js.
@@ -205,6 +224,7 @@ npm run build:site      # static site-dist artifact
 npm pack --dry-run      # inspect the distributable file list
 npm run check:docs      # API/example/site-copy parity after build
 npm run check:examples  # Node 22 + Chrome; set CHROME if required
+npm run check:recipes   # eight practical source/built/installed recipes
 ```
 
 The [browser checks](test/browser.html) exercise the real DOM and structural CSS. The [performance page](performance/index.html) reports source size and lets you measure frame intervals locally. Browser benchmark results describe the current machine and scene; they are not an all-device performance guarantee. See the [audit and release plan](audit/index.html) for completed work and remaining validation gates.

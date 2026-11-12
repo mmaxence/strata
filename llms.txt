@@ -22,3 +22,5 @@ MIT library by Maxence Mauduit. Keep ordinary HTML controls and accessibility. N
 - [Full agent reference](https://mmaxence.github.io/strata/llms-full.txt): combined README, integration guidance and TypeScript API.
 - [Source repository](https://github.com/mmaxence/strata): MIT runtime and examples.
 - [Sitemap](https://mmaxence.github.io/strata/sitemap.xml).
+
+- [Eight practical recipes](examples/recipes/guide.md): choice guide and runnable gallery for consistent selection, focus return, gestures, native/reduced layouts and cleanup; local candidate, not publication evidence.

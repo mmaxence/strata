@@ -10,9 +10,9 @@ await mkdir(out+'/test',{recursive:true});
 for(const name of ['browser.html','browser.mjs'])await cp(root+'/test/'+name,out+'/test/'+name);
 await writeFile(out+'/index.html',(await readFile(root+'/demo/index.html','utf8')).replace('<head>','<head><base href="./demo/">').replaceAll('href="#workspace"','href="../#workspace"'));
 await writeFile(out+'/.nojekyll','');
-await writeFile(out+'/sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+['','overview.html','documentation/','performance/','research/','examples/basic/','examples/workspace/'].map(p=>`<url><loc>${siteURL}${p}</loc></url>`).join('')+'</urlset>\n');
+await writeFile(out+'/sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+['','overview.html','documentation/','performance/','research/','examples/basic/','examples/workspace/','examples/recipes/'].map(p=>`<url><loc>${siteURL}${p}</loc></url>`).join('')+'</urlset>\n');
 
-for(const [file,path] of [['index.html',''],['demo/index.html',''],['overview.html','overview.html'],['documentation/index.html','documentation/'],['performance/index.html','performance/'],['research/index.html','research/'],['examples/basic/index.html','examples/basic/'],['examples/workspace/index.html','examples/workspace/']]) {
+for(const [file,path] of [['index.html',''],['demo/index.html',''],['overview.html','overview.html'],['documentation/index.html','documentation/'],['performance/index.html','performance/'],['research/index.html','research/'],['examples/basic/index.html','examples/basic/'],['examples/workspace/index.html','examples/workspace/'],['examples/recipes/index.html','examples/recipes/']]) {
  const page=await readFile(out+'/'+file,'utf8');
  const title=page.match(/<title>([^<]+)<\/title>/)?.[1]||'Living Space';
  const description=page.match(/<meta name="description" content="([^"]+)"/)?.[1]||'Spatial interfaces built from real HTML.';
