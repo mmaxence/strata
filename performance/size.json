@@ -15,15 +15,15 @@
     },
     {
       "file": "src/strata.css",
-      "bytes": 6819,
-      "gzipBytes": 1825
+      "bytes": 7422,
+      "gzipBytes": 1993
     },
     {
       "file": "src/strata.js",
-      "bytes": 52024,
-      "gzipBytes": 12540
+      "bytes": 52108,
+      "gzipBytes": 12578
     }
   ],
-  "totalBytes": 62525,
-  "totalGzipBytes": 15739
+  "totalBytes": 63212,
+  "totalGzipBytes": 15945
 }

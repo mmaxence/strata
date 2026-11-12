@@ -11,3 +11,5 @@ Runtime dependencies: none. TypeScript is optional for consumers. Do not invent 
 Public documentation: https://mmaxence.github.io/strata/documentation/. Text-first overview: https://mmaxence.github.io/strata/overview.html. Machine-readable index: https://mmaxence.github.io/strata/llms.txt. Other released projects: https://mmaxence.github.io/solids/ , https://mmaxence.github.io/materia/ , https://mmaxence.github.io/prisma/ .
 
 Rail navigation uses navigate(integerStep), clamps at the ends, and never detaches cards during dragging. Fan shares pile cycle/free-placement behavior. Collection checklist and reading state are demo-owned, not controller state.
+
+Without a controller, structural CSS presents panels in readable document flow. The controller owns data-ready and switches to spatial styles before measuring; do not pre-author this marker. Destroy restores static fallback. Keep 3D camera ancestors free of filter/opacity flattening; depth blur belongs on visual wrappers. Hero explosion/rocket/nested-module choreography remains demo-owned.

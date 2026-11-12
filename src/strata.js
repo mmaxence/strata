@@ -37,6 +37,8 @@ function createScene(element, {
     const fallback = index === 0 ? { x: 0, y: 0, width: 430, height: Math.max(560, rows * 290 - 20) } : { x: index % 2 ? -380 : 380, y: (Math.floor((index - 1) / 2) - (rows - 1) / 2) * 290, width: 260, height: 270 };
     return [surface.dataset.surface, { x: finite(supplied?.x, fallback.x), y: finite(supplied?.y, fallback.y), width: clamp(finite(supplied?.width, fallback.width), 120, 2e3), height: clamp(finite(supplied?.height, fallback.height), 100, 3e3) }];
   }));
+  // Enable spatial CSS before reading authored sizes; destroy restores the marker.
+  element.dataset.ready = "true";
   const authoredDimensions = new Map(surfaces.map((surface) => [surface.dataset.surface, { w: surface.offsetWidth || 260, h: surface.offsetHeight || 250 }]));
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   let active = surfaces[0].dataset.surface, mode = "focus", depth = 1, rotation = 0, field = 1.1, drag = null, release = null, raf = 0, pointerInput = false, disposed = false;
@@ -978,7 +980,6 @@ function createScene(element, {
   }
   render();
   element.getBoundingClientRect();
-  element.dataset.ready = "true";
   mountedScenes.set(element, true);
   notify();
   return { focus, setMode, resizeSurface, navigate, pause() {
