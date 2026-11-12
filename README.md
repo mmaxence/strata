@@ -250,3 +250,7 @@ The hero composes spatial behaviours inside one interface: a References module c
 ### Source-content fallback
 
 Before mounting, or if JavaScript is unavailable, the structural stylesheet keeps panels visible in document flow and hides inactive drag/resize grips. Mounting switches to spatial layout; `destroy()` restores the source marker and static fallback. This does not emulate spatial interactions without JavaScript or certify browsers lacking the required modern APIs. Keep essential content in the real HTML and do not author the controller-owned `data-ready` marker.
+
+## Optional site analytics
+
+The published showcase offers an optional Facet page/source measurement control on its seven public content routes. It stays off until allowed, honors browser privacy signals, and keeps the choice separate from other Living Things apps. The notice describes 30-day active events and up to seven additional recovery days. No visitor IDs, linked journeys, country or device details are collected. The runtime package includes no analytics; build-time site integration lives in `analytics/` and `scripts/build-site.mjs`.

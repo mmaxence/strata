@@ -8,6 +8,8 @@ await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});
 for(const name of ['demo','src','documentation','performance','examples','audit','research','README.md','LICENSE','ASSETS.md','llms.txt','agent-guide.md','overview.html','AGENTS.md'])await cp(root+'/'+name,out+'/'+name,{recursive:true});
 await mkdir(out+'/test',{recursive:true});
 for(const name of ['browser.html','browser.mjs'])await cp(root+'/test/'+name,out+'/test/'+name);
+await cp(root+'/analytics/facet-consent.js',out+'/facet-consent.js');
+const facetNotice=await readFile(root+'/analytics/notice.html','utf8');
 await writeFile(out+'/index.html',(await readFile(root+'/demo/index.html','utf8')).replace('<head>','<head><base href="./demo/">').replaceAll('href="#workspace"','href="../#workspace"'));
 await writeFile(out+'/.nojekyll','');
 await writeFile(out+'/sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+['','overview.html','documentation/','performance/','research/','examples/basic/','examples/workspace/','examples/recipes/'].map(p=>`<url><loc>${siteURL}${p}</loc></url>`).join('')+'</urlset>\n');
@@ -19,7 +21,7 @@ for(const [file,path] of [['index.html',''],['demo/index.html',''],['overview.ht
  const url=siteURL+path;
  const meta=`<meta name="robots" content="index,follow,max-image-preview:large"><link rel="alternate" type="text/plain" href="${siteURL}llms.txt" title="Agent resource index"><link rel="canonical" href="${url}"><meta property="og:type" content="website"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${url}"><meta property="og:image" content="${siteURL}demo/assets/orbit.jpg"><meta name="twitter:card" content="summary_large_image">`;
  const schema=file==='index.html'?'<script type="application/ld+json">'+JSON.stringify({'@context':'https://schema.org','@type':'SoftwareSourceCode',name:'Living Space',alternateName:'Strata',description:'Dependency-free spatial interfaces built from real HTML panels.',version:'0.1.0-alpha.1',license:'https://opensource.org/license/mit',programmingLanguage:'JavaScript',runtimePlatform:'Web browser',codeRepository:'https://github.com/mmaxence/strata',isAccessibleForFree:true,url:siteURL,author:{'@type':'Person',name:'Maxence Mauduit',url:'https://mmaxence.me/'}})+'</script>':'';
- await writeFile(out+'/'+file,page.replace('</head>',meta+schema+'</head>'));
+ await writeFile(out+'/'+file,page.replace('</head>',meta+schema+'</head>').replace('</body>',facetNotice.replaceAll('{{FACET_PAGE}}','/strata/'+path).replaceAll('{{FACET_SRC}}',(file==='index.html'?'../': '../'.repeat(file.split('/').length-1))+'facet-consent.js?v=pages-v1')+'</body>'));
 }
 await writeFile(out+'/robots.txt',`# Project-local copy; origin-wide rules belong at /robots.txt.
 User-agent: *
