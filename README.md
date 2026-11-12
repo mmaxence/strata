@@ -106,17 +106,105 @@ Wrap full panel controls in `[data-content]` and supply optional `[data-summary]
 - Do not transform or blur the outer surface yourself. Style `[data-visual]`. CSS transforms create containing blocks; portals are preferable for application-wide overlays.
 - The runtime has no browser globals at module import. Mounting requires a browser with modern CSS transforms, Pointer Events, ResizeObserver and requestAnimationFrame. Call it inside your framework's client mount/effect hook, with destroy in cleanup.
 
+## Practical integration recipes
+
+These recipes describe **0.1.0-alpha.1**. Snippets are alternatives for the indicated markup, not multiple controllers to run sequentially on one root. Source/runtime APIs remain the same; the examples' snapshotExample/disposeExample helpers are application code, not library exports. Run the [basic example](examples/basic/index.html) for focus/drag/path/pause, and the [workspace](examples/workspace/index.html) for assembly/resize/native form state. Both include destroy/remount and use only original HTML/CSS with system fonts, no media assets or demo scripts.
+
+### Install and initialize
+
+In a repository checkout with Node 22, run npm ci, then npm pack. Install the actual local tarball path in your application, or copy the complete src directory with LICENSE. The package stays **private:true**; its provisional name is not an available/registered npm or CDN promise. Keep @strata-ui/core and @strata-ui/core/style.css imports stable. A bundler uses:
+
+```js
+import {createScene} from '@strata-ui/core';
+import '@strata-ui/core/style.css';
+const element = document.querySelector('#gallery');
+const scene = createScene(element, {compactWidth:650, referenceWidth:1120});
+// Register scene.destroy() in client unmount cleanup before removing panels/root.
+```
+
+Native browser pages need an import map and a separate stylesheet link; the runnable examples show both. Import is SSR-safe, mounting requires connected browser HTML and modern DOM/CSS APIs. Structural CSS is required, not a theme. Keep the direct .scene > .camera > .surface[data-surface] structure, unique nonempty IDs, visual wrappers and native content before mounting. Do not pre-author controller-owned data-ready. A duplicate controller on one root throws.
+
+### Focus and drag without replacing native controls
+
+```js
+// After createScene, with these application buttons already connected:
+const inspect = document.querySelector('#notes');
+const close = document.querySelector('#overview');
+inspect.addEventListener('click', () => scene.focus('notes'));
+close.addEventListener('click', () => {
+  scene.setMode('overview');
+  inspect.focus({preventScroll:true}); // Intentional user-close destination, not a focus trap.
+});
+// Remove these application listeners in your own cleanup as well.
+```
+
+focus(id) is **spatial selection**, not DOM focus/modal semantics. It does not install inert siblings or a focus trap. Native tab order is still authored DOM order; Escape returns to overview and focuses the scene. App dialogs/routes or actions hiding a focused field must choose their own appropriate focus destination. Preserve labels, readable summaries, logical order and semantic buttons; source identity alone does not certify accessibility.
+
+Provide a labelled data-drag button for movement, data-focus for selection and optional labelled resize corners in workspace mode. Arrow keys on grips/corners provide movement/resize alternatives. Native inputs/links/contenteditable descendants are excluded from the ordinary surface gesture path; arbitrary custom nested widgets are not universally arbitrated. Dedicated grips use pointer capture; cancel/release must finish the gesture. Compact mode hides grips and allows ordinary scrolling. Pile layout reserves touch-action:none on its surfaces; it is not a promise that every nested scroller/gesture will compose correctly. Touch emulation is not a physical phone test.
+
+### Separate and reassemble the same form nodes
+
+```js
+const workspace = createScene(element, {
+  workspace:true,
+  assembly:{width:1080,height:560,slots:{
+    canvas:{x:0,y:0,width:430,height:480},
+    settings:{x:-370,y:0,width:270,height:320},
+    notes:{x:370,y:0,width:270,height:320},
+  }},
+});
+workspace.setAssembled(true);
+workspace.setAssembled(false);
+workspace.resizeSurface('canvas', 600, 420);
+// Cleanup: workspace.destroy(); never mount this over an existing controller.
+```
+
+Use this in place of the earlier controller, not as a second mount on the same root. Workspace is opt-in; its first surface is primary. setAssembled works only for workspace scenes and uses assembly slots to arrange those same panels; it clears an active path and changes selection/mode. It does **not** split arbitrary DOM into layers or implement the showcase Explosion/rocket/card-to-camera choreography. Native input/textarea values stay in the same nodes through supported updates. Keep data-content interiors scrollable and provide useful data-summary text; when a panel compacts, essential actions still need a clear way to reach its full content.
+
+### Update and dispose
+
+Keep panel membership/IDs stable for a controller's lifetime. Native text/form edits remain application DOM state; do not rerender/replace the panel nodes under the controller. Use public setters for layouts/paths/depth/assembly/sizing. Root ResizeObserver handles container changes; arbitrary content/font/transform changes are not a universal refresh signal. There is no public refresh() or generic update() method. Use resizeSurface where appropriate, or destroy/remount after structural/constructor changes; retain values in native nodes or your application model.
+
+pause()/resume() apply to this controller's animation, independently of hidden document, observed offscreen, compact width and live reduced preference. They do not disable native controls, stop unrelated CSS/demo timers or pause child libraries/media. Never clear a user's manual pause because visibility/preference changed. The examples retain that choice across their own controller remount and BFCache lifecycle; they do not provide a general cross-library scheduler/intent adapter.
+
+Destroy is idempotent, cancels controller motion/observers/listeners and restores captured authored state without replacing inputs. Later controller calls are inert. Call it before root removal/reparenting, then clean up your own listeners/async work. Without a controller the scoped structural fallback keeps direct panels in document flow; it does not flatten a custom nested camera. Missing modern APIs/CSS or missing structural styles are not polyfilled. Reduced/compact presentation and a readable no-JS source are distinct states, not a measured all-browser guarantee.
+
+### Complete public controller, not showcase API
+
+| Members | Boundary |
+| --- | --- |
+| focus(id), setMode(mode) | Spatial selection / overview, not modal DOM focus |
+| setLayout(layout), navigate(step) | grid/pile/fan/rail; navigate is rail-only and clamps |
+| setPath(path, options), orbit(degrees) | none/belt/float/wave/spiral; orbit is camera yaw clamped ±12°, not a path ID |
+| setAssembled(bool), resizeSurface(id,w,h) | Workspace arrangement and panel size; not arbitrary layer explosion |
+| sendToBack(), setPileDragMode(mode) | Pile/fan cycle/free rules; free mode is not a workspace solver |
+| setDepth(value), setDepthOfField(value) | Decorative depth 0–1.5 / blur field 0–3 |
+| pause(), resume(), isPaused | Manual scheduling intent; live visibility/preference gates stay independent |
+| reset() | Restores controller defaults/authored sizes while retaining documented path/layout/pause state; not native form reset |
+| destroy(), state, stats | Owned cleanup and readonly snapshots; counters are not GPU/memory/FPS certification |
+
+Constructor options: workspace, compactWidth (default 650, clamped 320–1600), referenceWidth (1120, 320–4000), observeVisibility (true), assembly and onChange. Path options use diameter 200–900, axis ±80°, speed 0.2–3, interaction none/pause/steer and tilt 0–12°. Initial options and setters remain defined by [strata.d.ts](src/strata.d.ts); do not infer undocumented methods/options from demo code.
+
+### Alpha migration and geometry limits
+
+Keep legacy repository/browser filenames, package identity/imports and data-surface IDs. Source/local tarballs remain alpha/private; do not remove safeguards or invent a registry alias. Older prototypes using demo functions, numeric chapter/rocket timers, explode(), card projection or checklist stores must keep those as app code. Use setAssembled for declared workspace slots, setPath('belt') for an orbit-like path and orbit(degrees) separately for yaw. The legacy data-case="creative" workspace opt-in is still accepted; prefer explicit workspace:true for new examples. Do not replace fixed panel sets without cleanup.
+
+The no-JS direct-camera fallback and controller-owned data-ready marker must remain intact during upgrades. Never apply opacity/blur/filter to a camera ancestor that must preserve a 3D hierarchy. Space owns surface transforms/z-index; theme visual leaves instead. Portals/outside roots are often appropriate for application-wide overlays. Drag-plane inversion does not model every decorative tilt/zoom/perspective ancestor/nested scroll; child text/media/object pointer projection is not automatically correct. Cross-library composition and physical device budgets require their own evidence. The runtime has no canvas/DPR option, WebGL/mesh occlusion or physics solver.
+
 ## Validate and share
 
 Use Node.js 22 or newer for development scripts. The browser runtime itself does not require Node.js.
 
 ```sh
+npm ci                  # repository development tools only
 npm run dev             # localhost:4414
 npm run check           # syntax, export paths, no runtime dependencies
 npm test                # deterministic controller + geometry regressions
 npm run measure:size    # raw source and individual gzip sizes
 npm run build:site      # static site-dist artifact
 npm pack --dry-run      # inspect the distributable file list
+npm run check:docs      # API/example/site-copy parity after build
+npm run check:examples  # Node 22 + Chrome; set CHROME if required
 ```
 
 The [browser checks](test/browser.html) exercise the real DOM and structural CSS. The [performance page](performance/index.html) reports source size and lets you measure frame intervals locally. Browser benchmark results describe the current machine and scene; they are not an all-device performance guarantee. See the [audit and release plan](audit/index.html) for completed work and remaining validation gates.

@@ -27,7 +27,9 @@
     "test": "node --test test/*.test.mjs",
     "measure:size": "node scripts/measure-size.mjs",
     "build:site": "node scripts/build-site.mjs",
-    "prepack": "npm run check && npm test"
+    "prepack": "npm run check && npm test",
+    "check:docs": "node scripts/check-docs.mjs",
+    "check:examples": "node scripts/check-examples.mjs"
   },
   "homepage": "https://mmaxence.github.io/strata/",
   "repository": {
@@ -44,5 +46,8 @@
     "animation",
     "javascript",
     "accessibility"
-  ]
+  ],
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
 }

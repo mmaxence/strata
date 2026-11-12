@@ -8,9 +8,10 @@ MIT library by Maxence Mauduit. Keep ordinary HTML controls and accessibility. N
 - [Integration guide](agent-guide.md): markup, lifecycle, paths, workspace and limitations.
 - [Documentation](documentation/index.html): complete public API and usage.
 - [Type declarations](src/strata.d.ts): public contract.
-- [Standalone example](examples/basic/index.html): no demo stylesheet dependency.
-- [Adaptive workspace](examples/workspace/index.html): standalone assembly, resizing and semantic compaction.
+- [Standalone example](examples/basic/index.html): public selection/drag/path, pause, destroy/remount; no demo stylesheet dependency.
+- [Adaptive workspace](examples/workspace/index.html): standalone assembly, resizing, native form/focus state and cleanup.
 - [Performance](performance/index.html): reproducible local frame measurements and source sizes.
+- [Alpha migration and recipes](README.md#practical-integration-recipes): complete public controller, constructor/update boundaries, focus versus modal semantics, layout/assembly and geometry limitations.
 - [README](README.md): setup and release commands.
 - [License](LICENSE): MIT notice.
 - [Asset notices](ASSETS.md): demo artwork and optional fonts.
