@@ -138,3 +138,7 @@ The hero cards contain small interactive experiments: preview two letters, chang
 Explosion supports gentle cursor-controlled perspective, hover highlighting, and click or keyboard selection to inspect a layer. Escape clears selection. Hero horizontal swipes browse selected cards, advance the stack or rail, and switch the other reel arrangements; vertical touch gestures keep page scrolling.
 
 The hero composes spatial behaviours inside one interface: a References module contains a draggable orbit, and a Working stack module cycles documents. The interface separates into modules and reassembles; the behaviours remain nested inside those modules. Selecting a module pauses playback for inspection; dismissing it restores its arrangement and resumes the timeline.
+
+## Optional site analytics
+
+The published showcase offers an optional Facet page/source measurement control on its seven public content routes. It stays off until allowed, honors browser privacy signals, and keeps the choice separate from other Living Things apps. The notice describes 30-day active events and up to seven additional recovery days. No visitor IDs, linked journeys, country or device details are collected. The runtime package includes no analytics; build-time site integration lives in `analytics/` and `scripts/build-site.mjs`.
