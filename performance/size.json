@@ -15,8 +15,8 @@
     },
     {
       "file": "src/strata.css",
-      "bytes": 7422,
-      "gzipBytes": 1993
+      "bytes": 7518,
+      "gzipBytes": 2012
     },
     {
       "file": "src/strata.js",
@@ -24,6 +24,6 @@
       "gzipBytes": 12578
     }
   ],
-  "totalBytes": 63212,
-  "totalGzipBytes": 15945
+  "totalBytes": 63308,
+  "totalGzipBytes": 15964
 }

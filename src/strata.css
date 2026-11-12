@@ -43,10 +43,10 @@
 /* Progressive enhancement: source content stays readable before mounting or
    when the module is unavailable. The controller switches to spatial styles
    synchronously before measuring panels. */
-.scene:not([data-ready]) { height: auto !important; perspective: none; }
-.scene:not([data-ready]) .camera { position: relative; inset: auto; display: grid; gap: 18px; transform: none !important; pointer-events: auto; }
-.scene:not([data-ready]) .surface { position: relative; top: auto; left: auto; max-width: 100%; transform: none !important; visibility: visible; transition: none; }
-.scene:not([data-ready]) [data-drag], .scene:not([data-ready]) [data-resize] { display: none; }
+.scene:not([data-ready]):has(> .camera > .surface[data-surface]) { height: auto !important; perspective: none; }
+.scene:not([data-ready]) > .camera { position: relative; inset: auto; display: grid; gap: 18px; transform: none !important; pointer-events: auto; }
+.scene:not([data-ready]) > .camera > .surface { position: relative; top: auto; left: auto; max-width: 100%; transform: none !important; visibility: visible; transition: none; }
+.scene:not([data-ready]) > .camera > .surface [data-drag], .scene:not([data-ready]) > .camera > .surface [data-resize] { display: none; }
 .scene .surface[data-loop=true],
 .scene .surface[data-dragging=true],
 .scene .surface[data-settling=true],
