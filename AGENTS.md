@@ -1,6 +1,6 @@
-# Working on Strata
+# Working on Living Space
 
-Strata is a dependency-free spatial UI runtime for ordinary HTML. This repository contains the runtime, documentation, examples and its interactive showcase.
+Living Space is a dependency-free spatial UI runtime for ordinary HTML. This repository contains the runtime, documentation, examples and its interactive showcase.
 
 - Public contract: `src/strata.d.ts`. Integration guidance: `agent-guide.md`.
 - Runtime code lives in `src/`; showcase code lives in `demo/`. Keep their dependencies and performance claims separate.

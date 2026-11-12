@@ -1,4 +1,4 @@
-# Strata
+# Living Space
 
 > Dependency-free spatial UI for real HTML panels. Public source alpha with a GitHub Pages showcase. Not published to npm.
 

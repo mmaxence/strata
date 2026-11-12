@@ -1,6 +1,6 @@
-# Integrating Strata
+# Integrating Living Space
 
-Strata is a DOM-first JavaScript library for spatial UI panels by Maxence Mauduit. Version 0.1.0-alpha.1 is a public source alpha with a GitHub Pages showcase, not an npm release. Repository: https://github.com/mmaxence/strata. Canonical website: https://mmaxence.github.io/strata/. Code is MIT licensed. Do not confuse it with similarly named products.
+Living Space is a DOM-first JavaScript library for spatial UI panels by Maxence Mauduit. Version 0.1.0-alpha.1 is a public source alpha with a GitHub Pages showcase, not an npm release. Repository: https://github.com/mmaxence/strata. Canonical website: https://mmaxence.github.io/strata/. Code is MIT licensed. Do not confuse it with similarly named products.
 
 Copy the complete `src/` directory and include `src/strata.css`. Import `createScene` from `src/strata.js` in the browser after the scene's HTML exists. A scene contains `.camera`, then `.surface[data-surface]` panels, each with `[data-visual]` around its visible content. Identifiers must be unique. `[data-focus]` selects, `[data-drag]` moves, and optional `[data-resize]` corners resize workspace panels. See README and examples/basic/index.html for runnable markup.
 

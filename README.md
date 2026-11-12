@@ -1,6 +1,9 @@
-# Strata
+# Living Space
 
-Real HTML interfaces, arranged in space. A dependency-free, DOM-first spatial UI library in the Solids / Materia / Prisma family.
+Part of **Living Things — Libraries for a living web**. Formerly **Strata**. Existing repository URLs, package names, imports and APIs remain unchanged.
+
+
+Real HTML interfaces, arranged in space. A dependency-free, DOM-first spatial UI library in the Living Object / Living Type / Living Frame family.
 
 **0.1.0-alpha.1 · public alpha.** [Live site](https://mmaxence.github.io/strata/) · [Documentation](https://mmaxence.github.io/strata/documentation/) · [Agent guide](https://mmaxence.github.io/strata/agent-guide.md). Source is MIT licensed. Not published to npm; the package name remains provisional.
 
